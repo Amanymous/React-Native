@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,24 +6,25 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
-} from "react-native";
-import Input from '../components/Input';
-import NumberContainer from "../components/NumberContainer";
-import Card from "../components/card";
-import Color from "../constants/color";
+  Alert
+} from 'react-native';
 
-const Game = (props) => {
-  const [enteredValue, setEnteredValue] = useState("");
+import Card from '../components/Card';
+import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
+import Colors from '../constants/colors';
+
+const StartGameScreen = props => {
+  const [enteredValue, setEnteredValue] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
 
-  const numberInputHandler = (inputText) => {
-    setEnteredValue(inputText.replace(/[^0-9]/g, ""));
+  const numberInputHandler = inputText => {
+    setEnteredValue(inputText.replace(/[^0-9]/g, ''));
   };
 
   const resetInputHandler = () => {
-    setEnteredValue("");
+    setEnteredValue('');
     setConfirmed(false);
   };
 
@@ -31,15 +32,15 @@ const Game = (props) => {
     const chosenNumber = parseInt(enteredValue);
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert(
-        "Invalid number!",
-        "Number has to be a number between 1 and 99.",
-        [{ text: "Okay", style: "destructive", onPress: resetInputHandler }]
+        'Invalid number!',
+        'Number has to be a number between 1 and 99.',
+        [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
       );
       return;
     }
     setConfirmed(true);
     setSelectedNumber(chosenNumber);
-    setEnteredValue("");
+    setEnteredValue('');
     Keyboard.dismiss();
   };
 
@@ -80,14 +81,14 @@ const Game = (props) => {
               <Button
                 title="Reset"
                 onPress={resetInputHandler}
-                color={Color.accent}
+                color={Colors.accent}
               />
             </View>
             <View style={styles.button}>
               <Button
                 title="Confirm"
                 onPress={confirmInputHandler}
-                color={Color.primary}
+                color={Colors.primary}
               />
             </View>
           </View>
@@ -132,4 +133,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Game;
+export default StartGameScreen;
